@@ -19,7 +19,7 @@ body {
 
 @layer components {
   .glass-effect {
-    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl;
+    @apply bg-blue-800 bg-opacity-10 backdrop-filter backdrop-blur-sm bg-clip-padding border border-gray-100 border-opacity-10 rounded-md;
   }
   
   .gradient-text {
@@ -44,10 +44,11 @@ body {
 }
 
 .hero-gradient {
-  background: linear-gradient(135deg, 
-    rgba(30, 58, 138, 0.95) 0%, 
-    rgba(59, 130, 246, 0.9) 50%, 
-    rgba(239, 68, 68, 0.85) 100%
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.95) 0%,      /* dark navy (replaces #1e3a8a) */
+    rgba(30, 41, 59, 0.9) 50%,      /* slate-ish blue (darker) */
+    rgba(17, 24, 39, 0.85) 100%     /* almost black with a hint of gray */
   );
 }
 

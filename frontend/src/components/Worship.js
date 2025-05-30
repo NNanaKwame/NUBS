@@ -6,20 +6,20 @@ const Worship = () => {
   const services = [
     {
       title: "Sunday Worship Service",
-      time: "9:00 AM - 11:30 AM",
-      location: "Main Auditorium, KNUST",
+      time: "9:30 AM",
+      location: "Katanga Hall Dining Hall",
       description: "Join us for uplifting worship, powerful preaching, and community fellowship."
     },
     {
-      title: "Wednesday Bible Study",
-      time: "6:00 PM - 7:30 PM", 
-      location: "Fellowship Hall",
-      description: "Deep dive into God's Word with interactive discussions and prayer."
+      title: "Tuesday Midweek Service",
+      time: "6:30 PM", 
+      location: "Katanga Hall Dining Hall",
+      description: "A time of refreshing worship and practical teaching to equip you for the week ahead."
     },
     {
-      title: "Friday Prayer Meeting",
-      time: "7:00 PM - 8:30 PM",
-      location: "Prayer Room",
+      title: "Thursday Prayer Meeting",
+      time: "6:00 PM - 7:00 PM",
+      location: "At the various prayer centers",
       description: "Powerful times of intercession and spiritual breakthrough."
     }
   ];
@@ -27,7 +27,7 @@ const Worship = () => {
   const expectations = [
     {
       icon: MusicalNoteIcon,
-      title: "Contemporary Worship",
+      title: "Powerful Worship",
       description: "Modern worship music that connects with the student generation"
     },
     {

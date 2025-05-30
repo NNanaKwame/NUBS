@@ -81,8 +81,8 @@ const About = () => {
           >
             <div className="relative overflow-hidden rounded-2xl shadow-2xl">
               <img 
-                src="https://images.pexels.com/photos/2325729/pexels-photo-2325729.jpeg"
-                alt="African student studying with Bible - representing academic and spiritual growth"
+                src="https://imgur.com/IbZCJCr.jpg"
+                alt="NUBS KNUST community gathering - showcasing unity and worship"
                 className="w-full h-96 object-cover hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary-900/50 to-transparent"></div>
@@ -97,8 +97,8 @@ const About = () => {
               className="absolute -bottom-8 -right-8 glass-effect rounded-xl p-6 shadow-xl"
             >
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600">500+</div>
-                <div className="text-sm text-gray-600">Active Members</div>
+                <div className="text-3xl font-bold text-primary-600">300+</div>
+                <div className="text-sm text-white">Active Members</div>
               </div>
             </motion.div>
           </motion.div>

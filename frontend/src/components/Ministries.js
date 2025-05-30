@@ -6,45 +6,47 @@ import {
   HeartIcon, 
   UserGroupIcon,
   MegaphoneIcon,
-  BookOpenIcon 
+  BookOpenIcon, 
+  FireIcon,
+  CogIcon
 } from '@heroicons/react/24/outline';
 
 const Ministries = () => {
   const ministries = [
     {
       icon: MusicalNoteIcon,
-      title: "Worship Ministry",
+      title: "God's Instrument",
       description: "Leading the congregation in spirit-filled worship through music, vocals, and instruments.",
       color: "from-purple-500 to-purple-600"
     },
     {
-      icon: AcademicCapIcon,
-      title: "Student Leadership",
-      description: "Developing the next generation of Christian leaders on campus and beyond.",
+      icon: UserGroupIcon,
+      title: "Ministering Marshals",
+      description: "Using drama and performing arts to communicate the gospel.",
       color: "from-blue-500 to-blue-600"
     },
     {
-      icon: HeartIcon,
-      title: "Pastoral Care",
-      description: "Providing spiritual guidance, counseling, and support for students in need.",
+      icon: FireIcon,
+      title: "Prayer Force",
+      description: "Mobilizing prayer warriors to intercede for the church, campus, and community.",
       color: "from-red-500 to-red-600"
     },
     {
       icon: MegaphoneIcon,
-      title: "Evangelism Team",
+      title: "Outreach Ministry",
       description: "Sharing the gospel on campus and reaching out to non-believing students.",
       color: "from-green-500 to-green-600"
     },
     {
       icon: BookOpenIcon,
-      title: "Bible Study Groups",
-      description: "Small group discipleship focused on deep study of God's Word and application.",
+      title: "Bible Studies Ministry",
+      description: "Facilitating Bible studies to deepen understanding of Scripture.",
       color: "from-yellow-500 to-yellow-600"
     },
     {
-      icon: UserGroupIcon,
-      title: "Fellowship Ministry",
-      description: "Building community through social events, retreats, and relationship building.",
+      icon: CogIcon,
+      title: "Organizing Wing",
+      description: "In charge of publicity, and setting up the church for services and events.",
       color: "from-indigo-500 to-indigo-600"
     }
   ];

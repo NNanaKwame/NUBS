@@ -59,9 +59,9 @@ const Hero = () => {
             className="space-y-4"
           >
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white leading-tight">
-              NUBS
+              National Union of
               <span className="block gradient-text bg-gradient-to-r from-white via-primary-200 to-white bg-clip-text text-transparent">
-                KNUST
+                Baptist Students
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-white/90 font-light">
@@ -77,7 +77,7 @@ const Hero = () => {
             className="space-y-6"
           >
             <div className="glass-effect rounded-2xl p-8 mx-auto max-w-4xl">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-semibold text-white mb-4">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-semibold text-white mb-4">
                 "Presenting every man perfect in Christ"
               </h2>
               <p className="text-lg md:text-xl text-white/80 italic">
@@ -91,7 +91,7 @@ const Hero = () => {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="space-y-2"
             >
-              <h3 className="text-2xl md:text-3xl font-display font-bold text-accent-400">
+              <h3 className="text-2xl md:text-3xl font-display text-white font-bold text-accent-400">
                 Empowered, For Action
               </h3>
             </motion.div>

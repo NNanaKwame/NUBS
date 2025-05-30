@@ -9,20 +9,70 @@ const Join = () => {
   
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
+  // const onSubmit = async (data) => {
+  //   setIsLoading(true);
+    
+  //   // Simulate form submission
+  //   await new Promise(resolve => setTimeout(resolve, 2000));
+    
+  //   console.log('Form Data:', data);
+  //   setIsSubmitted(true);
+  //   setIsLoading(false);
+  //   reset();
+    
+  //   // Reset form after 3 seconds
+  //   setTimeout(() => setIsSubmitted(false), 3000);
+  // };
+
   const onSubmit = async (data) => {
-    setIsLoading(true);
+  setIsLoading(true);
+  
+  try {
+    // Replace with your Google Apps Script Web App URL
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwr7mW3-5_Bk0JmPCQwbQaTwQ-bPXd-DjgqWzzowzqvkmcu6J8Jqit17pIllMDGZn3hCA/exec';
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        program: data.program,
+        year: data.year,
+        hearAbout: data.hearAbout || ''
+      })
+    });
     
-    console.log('Form Data:', data);
-    setIsSubmitted(true);
+    if (response.ok) {
+      const result = await response.json();
+      
+      if (result.success) {
+        console.log('Form submitted successfully:', result.message);
+        setIsSubmitted(true);
+        reset();
+        
+        // Reset success message after 3 seconds
+        setTimeout(() => setIsSubmitted(false), 3000);
+      } else {
+        throw new Error(result.message || 'Form submission failed');
+      }
+    } else {
+      throw new Error('Network error occurred');
+    }
+    
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    
+    // Show user-friendly error message
+    alert('There was an error submitting your registration. Please check your internet connection and try again.');
+    
+  } finally {
     setIsLoading(false);
-    reset();
-    
-    // Reset form after 3 seconds
-    setTimeout(() => setIsSubmitted(false), 3000);
-  };
+  }
+};
 
   const benefits = [
     "Weekly worship services and Bible studies",
