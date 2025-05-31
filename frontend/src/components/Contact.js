@@ -17,19 +17,64 @@ const Contact = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
+  setIsLoading(true);
+  
+  try {
+    // Replace with your Google Apps Script Web App URL for contact form
+    const CONTACT_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbywA0919bR-TppL9RiLwkv3YKEdlHdFW4QLguRYRtcl2zP22ZcFD5JGsrqbuooLLbbczQ/exec';
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // Create FormData object (this avoids CORS preflight)
+    const formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('email', data.email);
+    formData.append('subject', data.subject);
+    formData.append('message', data.message);
     
-    console.log('Contact Form Data:', data);
-    setIsSubmitted(true);
+    console.log('Submitting contact form...');
+    
+    const response = await fetch(CONTACT_APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: formData // No Content-Type header needed with FormData
+    });
+    
+    console.log('Response status:', response.status);
+    
+    if (response.ok) {
+      // Try to parse as JSON, fallback to text
+      let result;
+      const responseText = await response.text();
+      
+      try {
+        result = JSON.parse(responseText);
+      } catch {
+        // If not JSON, assume success if status is OK
+        result = { success: true, message: 'Thank you for your message! We will get back to you soon.' };
+      }
+      
+      if (result.success !== false) {
+        console.log('Contact form submitted successfully');
+        setIsSubmitted(true);
+        reset();
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        throw new Error(result.message || 'Message submission failed');
+      }
+    } else {
+      throw new Error(`Server error: ${response.status}`);
+    }
+    
+  } catch (error) {
+    console.error('Error submitting contact form:', error);
+    
+    // Show user-friendly error message
+    alert('There was an error sending your message. Please try again or contact us directly.');
+    
+  } finally {
     setIsLoading(false);
-    reset();
-    
-    // Reset form after 3 seconds
-    setTimeout(() => setIsSubmitted(false), 3000);
-  };
+  }
+};
 
   const contactInfo = [
     {
@@ -47,32 +92,27 @@ const Contact = () => {
     {
       icon: EnvelopeIcon,
       title: "Email",
-      details: ["info@nubsknust.org", "Quick Response"],
-      link: "mailto:info@nubsknust.org"
+      details: ["nubsknust123@gmail.com", "Quick Response"],
+      link: "mailto:nubsknust123@gmail.com"
     },
-    {
-      icon: ClockIcon,
-      title: "Office Hours",
-      details: ["Mon - Fri: 2PM - 6PM", "Weekend: By Appointment"],
-      link: null
-    }
+    // {
+    //   icon: ClockIcon,
+    //   title: "Office Hours",
+    //   details: ["Mon - Fri: 2PM - 6PM", "Weekend: By Appointment"],
+    //   link: null
+    // }
   ];
 
   const leadership = [
     {
-      name: "Pastor John Doe",
-      role: "Campus Pastor",
-      email: "pastor@nubsknust.org"
+      name: "NUBS KNUST",
+      role: "NUBS KNUST",
+      email: "nubsknust123@gmail.com"
     },
     {
-      name: "Sarah Mensah",
-      role: "Student President",
-      email: "president@nubsknust.org"
-    },
-    {
-      name: "David Asante",
-      role: "Ministry Coordinator",
-      email: "ministry@nubsknust.org"
+      name: "Nubs KNUST Publicity Team",
+      role: "Publicty",
+      email: "knustnubs@gmail.com"
     }
   ];
 
@@ -198,7 +238,7 @@ const Contact = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
                   <p className="text-gray-600">
-                    Thank you for reaching out. We'll get back to you within 24 hours.
+                    Thank you for contacting NUBS KNUST. We have received your message and will get back to you soon!
                   </p>
                 </motion.div>
               ) : (

@@ -9,48 +9,46 @@ const Join = () => {
   
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-  // const onSubmit = async (data) => {
-  //   setIsLoading(true);
-    
-  //   // Simulate form submission
-  //   await new Promise(resolve => setTimeout(resolve, 2000));
-    
-  //   console.log('Form Data:', data);
-  //   setIsSubmitted(true);
-  //   setIsLoading(false);
-  //   reset();
-    
-  //   // Reset form after 3 seconds
-  //   setTimeout(() => setIsSubmitted(false), 3000);
-  // };
 
-  const onSubmit = async (data) => {
+const onSubmit = async (data) => {
   setIsLoading(true);
   
   try {
     // Replace with your Google Apps Script Web App URL
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwr7mW3-5_Bk0JmPCQwbQaTwQ-bPXd-DjgqWzzowzqvkmcu6J8Jqit17pIllMDGZn3hCA/exec';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby9jbvCeOjrO-OUpJZuK-i5HFLZmmAuxPP1hIgME4WQIpdgFOZRivFsrUCEVVOcmOK2kA/exec';
+    
+    // Create FormData object (this avoids CORS preflight)
+    const formData = new FormData();
+    formData.append('fullName', data.fullName);
+    formData.append('email', data.email);
+    formData.append('phone', data.phone);
+    formData.append('program', data.program);
+    formData.append('year', data.year);
+    formData.append('hearAbout', data.hearAbout || '');
+    
+    console.log('Submitting form data...');
     
     const response = await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        fullName: data.fullName,
-        email: data.email,
-        phone: data.phone,
-        program: data.program,
-        year: data.year,
-        hearAbout: data.hearAbout || ''
-      })
+      body: formData // No Content-Type header needed with FormData
     });
     
+    console.log('Response status:', response.status);
+    
     if (response.ok) {
-      const result = await response.json();
+      // Try to parse as JSON, fallback to text
+      let result;
+      const responseText = await response.text();
       
-      if (result.success) {
-        console.log('Form submitted successfully:', result.message);
+      try {
+        result = JSON.parse(responseText);
+      } catch {
+        // If not JSON, assume success if status is OK
+        result = { success: true, message: 'Registration submitted successfully!' };
+      }
+      
+      if (result.success !== false) {
+        console.log('Form submitted successfully');
         setIsSubmitted(true);
         reset();
         
@@ -60,14 +58,14 @@ const Join = () => {
         throw new Error(result.message || 'Form submission failed');
       }
     } else {
-      throw new Error('Network error occurred');
+      throw new Error(`Server error: ${response.status}`);
     }
     
   } catch (error) {
     console.error('Error submitting form:', error);
     
     // Show user-friendly error message
-    alert('There was an error submitting your registration. Please check your internet connection and try again.');
+    alert('There was an error submitting your registration. Please try again or contact support if the problem persists.');
     
   } finally {
     setIsLoading(false);
